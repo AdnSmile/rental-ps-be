@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 data class ResLogin(
 
     @JsonProperty("user_id")
-    val userId: String?,
+    val userId: Int?,
 
     val username: String?,
 

@@ -25,5 +25,6 @@ data class ReqRegisterUser(
 
     @field:Pattern(regexp = "^[0-9+]*$", message = "Field no_wa must contain only numbers and the '+' symbol")
     @JsonProperty("no_wa")
+    @field:Size(min = 3)
     val noWa: String?,
 )

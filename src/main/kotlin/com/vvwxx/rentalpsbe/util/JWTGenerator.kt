@@ -7,17 +7,15 @@ import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import jakarta.xml.bind.DatatypeConverter
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Value
 import java.util.*
 import javax.crypto.spec.SecretKeySpec
-
+import io.github.cdimascio.dotenv.dotenv
 
 class JWTGenerator {
 
     companion object {
-        @Value("\${SECRET_KEY}")
-        private lateinit var  key: String
-
+        private val dotenv = dotenv()
+        val key = dotenv["SECRET_KEY"]
         private val instance: JWTGenerator = JWTGenerator()
     }
 
@@ -25,11 +23,13 @@ class JWTGenerator {
 
     fun createJWT(req: UserEntity): String {
 
+        log.info("KEY: $key")
+
         val signatureAlgorithm: SignatureAlgorithm = SignatureAlgorithm.HS256
         val nowMills: Long = System.currentTimeMillis()
         val now = Date(nowMills)
 
-        val apiKeySecurityByte = DatatypeConverter.parseBase64Binary(key)
+        val apiKeySecurityByte = DatatypeConverter.parseBase64Binary(key.toString())
         val signingKey = SecretKeySpec(apiKeySecurityByte, signatureAlgorithm.jcaName)
 
         val builder: JwtBuilder = Jwts.builder().setSubject(req.username)
@@ -53,7 +53,7 @@ class JWTGenerator {
     fun decodeJWT(jwt: String): Claims {
 
         val claims: Claims = Jwts.parser()
-            .setSigningKey(DatatypeConverter.parseBase64Binary(key))
+            .setSigningKey(DatatypeConverter.parseBase64Binary(key.toString()))
             .parseClaimsJws(jwt).body
 
         log.info("ID : ${claims.id}")

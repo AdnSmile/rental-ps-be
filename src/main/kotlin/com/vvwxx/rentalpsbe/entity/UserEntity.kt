@@ -6,7 +6,7 @@ import jakarta.persistence.*
 import java.util.*
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 data class UserEntity(
 
     @Id

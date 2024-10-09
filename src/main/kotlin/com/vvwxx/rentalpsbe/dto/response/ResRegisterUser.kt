@@ -1,11 +1,9 @@
 package com.vvwxx.rentalpsbe.dto.response
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.util.Date
 
 data class ResRegisterUser(
-
-    @JsonProperty("user_id")
-    val userId: String?,
 
     val username: String?,
 
@@ -17,5 +15,5 @@ data class ResRegisterUser(
     val role: String?,
 
     @JsonProperty("created_at")
-    val createdAt: String?,
+    val createdAt: Date?,
 )

@@ -7,7 +7,7 @@ data class ReqLoginJWT(
 
     @field:NotEmpty(message = "field user_name must not empty")
     @field:NotBlank(message = "field user_name must not blank")
-    val userName: String? = null,
+    val username: String? = null,
 
     @field:NotEmpty(message = "field password must not empty")
     @field:NotBlank(message = "field password must not blank")

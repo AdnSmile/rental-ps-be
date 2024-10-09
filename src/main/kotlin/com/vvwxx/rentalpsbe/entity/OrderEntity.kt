@@ -5,7 +5,7 @@ import jakarta.persistence.*
 import java.util.*
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 data class OrderEntity(
 
     @Id
