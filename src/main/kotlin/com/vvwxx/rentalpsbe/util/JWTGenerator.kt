@@ -23,8 +23,6 @@ class JWTGenerator {
 
     fun createJWT(req: UserEntity): String {
 
-        log.info("KEY: $key")
-
         val signatureAlgorithm: SignatureAlgorithm = SignatureAlgorithm.HS256
         val nowMills: Long = System.currentTimeMillis()
         val now = Date(nowMills)
