@@ -24,7 +24,7 @@ data class MenuEntity(
     var stock: Int? = null,
 
     @JsonProperty("created_at")
-    val createdAt: Date? = null,
+    var createdAt: Date? = null,
 
     @JsonProperty("updated_at")
     var updatedAt: Date? = null,

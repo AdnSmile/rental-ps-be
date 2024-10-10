@@ -13,5 +13,6 @@ class PathMatchingInterceptor(
         registry.addInterceptor(authInterceptor)
             .excludePathPatterns("/v1/api/login")
             .excludePathPatterns("/v1/api/register")
+            .excludePathPatterns("/v1/api/menu/all")
     }
 }

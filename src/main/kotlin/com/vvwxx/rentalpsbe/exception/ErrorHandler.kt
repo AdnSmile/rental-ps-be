@@ -21,8 +21,8 @@ class ErrorHandler {
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
             BaseResponse(
-                status = "F",
                 message = exception.message,
+                status = "F",
                 data = null
             )
         )
@@ -33,8 +33,8 @@ class ErrorHandler {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
             BaseResponse(
-                status = "F",
                 message = notFoundException.message,
+                status = "F",
                 data = null
             )
         )
@@ -45,8 +45,8 @@ class ErrorHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
             BaseResponse(
-                status = "F",
                 message = exception.message,
+                status = "F",
                 data = null
             )
         )
@@ -61,8 +61,8 @@ class ErrorHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
             BaseResponse(
-                status = "F",
                 message = errors,
+                status = "F",
                 data = null
             )
         )
@@ -76,8 +76,8 @@ class ErrorHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
             BaseResponse(
-                status = "F",
                 message = errors,
+                status = "F",
                 data = null
             )
         )

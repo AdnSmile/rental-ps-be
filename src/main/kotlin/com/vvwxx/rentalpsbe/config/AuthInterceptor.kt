@@ -20,7 +20,7 @@ class AuthInterceptor: HandlerInterceptor {
         if (token == null) {
 
             val body: BaseResponse<String> = BaseResponse(
-                status = "401",
+                status = "F",
                 message = "You don't have permission",
                 data = null
             )

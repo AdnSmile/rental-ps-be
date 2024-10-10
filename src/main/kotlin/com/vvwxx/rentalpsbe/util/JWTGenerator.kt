@@ -31,7 +31,7 @@ class JWTGenerator {
         val signingKey = SecretKeySpec(apiKeySecurityByte, signatureAlgorithm.jcaName)
 
         val builder: JwtBuilder = Jwts.builder().setSubject(req.username)
-            .claim("id", req.userId)
+            .claim("id", req.userId.toString())
             .claim("username", req.username)
             .claim("email", req.email)
             .claim("noWa", req.noWa)
