@@ -106,7 +106,7 @@ Request:
 - Method : GET
 - Endpoint : `/v1/api/menu/{menuId}`
 - Header :
-  - Token : token
+  - token : value
 
 Response:
 ```
@@ -131,7 +131,7 @@ Request:
 - Method : POST
 - Endpoint : `/v1/api/menu`
 - Header :
-    - Token : token
+  - token : value
 - Body :
 ```
 {
@@ -165,7 +165,7 @@ Request:
 - Method : PUT
 - Endpoint : `/v1/api/menu/{menuId}`
 - Header :
-    - Token : token
+  - token : value
 - Body :
 ```
 {
@@ -199,7 +199,7 @@ Request:
 - Method : DELETE
 - Endpoint : `/v1/api/menu/{menuId}`
 - Header :
-    - Token : token
+  - token : value
 
 Response:
 ```
