@@ -1,7 +1,6 @@
 package com.vvwxx.rentalpsbe.util
 
 import com.vvwxx.rentalpsbe.entity.UserEntity
-import io.github.cdimascio.dotenv.Dotenv
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.JwtBuilder
 import io.jsonwebtoken.Jwts
@@ -14,10 +13,7 @@ import javax.crypto.spec.SecretKeySpec
 class JWTGenerator {
 
     companion object {
-        private val dotenv = Dotenv.configure()
-            .directory(System.getProperty("user.dir"))  // Arahkan ke root proyek
-            .load()
-        val key = dotenv["SECRET_KEY"]
+        val key = "FE9DB4AF2A9DF6234D12C71F787128CF53C6278C0C8BB2FDEFD2A71954D5589D"
         private val instance: JWTGenerator = JWTGenerator()
     }
 
@@ -31,7 +27,7 @@ class JWTGenerator {
         val nowMills: Long = System.currentTimeMillis()
         val now = Date(nowMills)
 
-        val apiKeySecurityByte = DatatypeConverter.parseBase64Binary(key.toString())
+        val apiKeySecurityByte = DatatypeConverter.parseBase64Binary(key)
         val signingKey = SecretKeySpec(apiKeySecurityByte, signatureAlgorithm.jcaName)
 
         val builder: JwtBuilder = Jwts.builder().setSubject(req.username)
@@ -55,7 +51,7 @@ class JWTGenerator {
     fun decodeJWT(jwt: String): Claims {
 
         val claims: Claims = Jwts.parser()
-            .setSigningKey(DatatypeConverter.parseBase64Binary(key.toString()))
+            .setSigningKey(DatatypeConverter.parseBase64Binary(key))
             .parseClaimsJws(jwt).body
 
         log.info("ID : ${claims.id}")
