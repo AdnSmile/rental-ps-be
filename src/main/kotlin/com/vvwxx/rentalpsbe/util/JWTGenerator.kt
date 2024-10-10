@@ -14,7 +14,9 @@ import io.github.cdimascio.dotenv.dotenv
 class JWTGenerator {
 
     companion object {
-        private val dotenv = dotenv()
+        private val dotenv = io.github.cdimascio.dotenv.Dotenv.configure()
+            .directory("./")  // Ganti dengan direktori file .env Anda
+            .load()
         val key = dotenv["SECRET_KEY"]
         private val instance: JWTGenerator = JWTGenerator()
     }

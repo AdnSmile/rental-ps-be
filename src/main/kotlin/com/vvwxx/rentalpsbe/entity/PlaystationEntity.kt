@@ -18,13 +18,15 @@ data class PlaystationEntity(
     var psClass: String? = null, // general, vip
 
     @JsonProperty("ps_type")
-    var psType: String? = null, // available, is use, maintenance, Reserved
+    var psType: String? = null,
 
-    @JsonProperty("hourlyRate")
+    var status: String? = null, // available, is use, maintenance, Reserved
+
+    @JsonProperty("hourly_rate")
     var hourlyRate: Int? = null,
 
     @JsonProperty("created_at")
-    val createdAt: Date? = null,
+    var createdAt: Date? = null,
 
     @JsonProperty("updated_at")
     var updatedAt: Date? = null,

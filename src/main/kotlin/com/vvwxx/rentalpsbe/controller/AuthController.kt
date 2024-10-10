@@ -4,6 +4,7 @@ import com.vvwxx.rentalpsbe.dto.request.ReqLoginJWT
 import com.vvwxx.rentalpsbe.dto.request.ReqRegisterUser
 import com.vvwxx.rentalpsbe.dto.response.BaseResponse
 import com.vvwxx.rentalpsbe.service.AuthService
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -19,7 +20,7 @@ class AuthController(
     @PostMapping("/register")
     fun registerUser(@RequestBody req: ReqRegisterUser): ResponseEntity<Any> {
 
-        return ResponseEntity.ok(
+        return ResponseEntity.status(HttpStatus.CREATED).body(
             BaseResponse(
                 message = "Successfully registered user",
                 status = "T",
@@ -31,7 +32,7 @@ class AuthController(
     @PostMapping("/login")
     fun login(@RequestBody req: ReqLoginJWT): ResponseEntity<Any> {
 
-        return ResponseEntity.ok(
+        return ResponseEntity.status(HttpStatus.OK).body(
             BaseResponse(
                 message = "Successfully logged in",
                 status = "T",

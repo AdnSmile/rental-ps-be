@@ -40,6 +40,18 @@ class ErrorHandler {
         )
     }
 
+    @ExceptionHandler(IllegalStateException::class)
+    fun ilegal(notFoundException: IllegalStateException): ResponseEntity<BaseResponse<Any>> {
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+            BaseResponse(
+                message = notFoundException.message,
+                status = "F",
+                data = null
+            )
+        )
+    }
+
     @ExceptionHandler(DuplicateException::class)
     fun duplicate(exception: DuplicateException): ResponseEntity<BaseResponse<Any>> {
 

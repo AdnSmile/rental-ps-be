@@ -6,6 +6,7 @@ import com.vvwxx.rentalpsbe.dto.response.BaseResponse
 import com.vvwxx.rentalpsbe.exception.UnauthenticatedException
 import com.vvwxx.rentalpsbe.service.MenuService
 import com.vvwxx.rentalpsbe.util.JWTGenerator
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -20,7 +21,7 @@ class MenuController(
              @RequestParam("size", defaultValue = "10") size: Int,
              ) : ResponseEntity<Any> {
 
-        return ResponseEntity.ok(
+        return ResponseEntity.status(HttpStatus.OK).body(
             BaseResponse(
                 message = "Successfully get list of menu",
                 status = "T",
@@ -32,7 +33,7 @@ class MenuController(
     @GetMapping("/{id}")
     fun get(@PathVariable("id") id: Int) : ResponseEntity<Any> {
 
-        return ResponseEntity.ok(
+        return ResponseEntity.status(HttpStatus.OK).body(
             BaseResponse(
                 message = "Successfully get the menu with id $id",
                 status = "T",
@@ -51,7 +52,7 @@ class MenuController(
             throw UnauthenticatedException("You don't have permission")
         }
 
-        return ResponseEntity.ok(
+        return ResponseEntity.status(HttpStatus.CREATED).body(
             BaseResponse(
                 message = "Successfully create a menu",
                 status = "T",
@@ -70,7 +71,7 @@ class MenuController(
             throw UnauthenticatedException("You don't have permission")
         }
 
-        return ResponseEntity.ok(
+        return ResponseEntity.status(HttpStatus.OK).body(
             BaseResponse(
                 message = "Successfully update a menu with id $id",
                 status = "T",
@@ -89,7 +90,7 @@ class MenuController(
             throw UnauthenticatedException("You don't have permission")
         }
 
-        return ResponseEntity.ok(
+        return ResponseEntity.status(HttpStatus.OK).body(
             BaseResponse(
                 message = "Successfully delete a menu with id $id",
                 status = "T",
