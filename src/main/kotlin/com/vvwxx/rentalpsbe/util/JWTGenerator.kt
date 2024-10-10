@@ -1,6 +1,7 @@
 package com.vvwxx.rentalpsbe.util
 
 import com.vvwxx.rentalpsbe.entity.UserEntity
+import io.github.cdimascio.dotenv.Dotenv
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.JwtBuilder
 import io.jsonwebtoken.Jwts
@@ -9,13 +10,12 @@ import jakarta.xml.bind.DatatypeConverter
 import org.slf4j.LoggerFactory
 import java.util.*
 import javax.crypto.spec.SecretKeySpec
-import io.github.cdimascio.dotenv.dotenv
 
 class JWTGenerator {
 
     companion object {
-        private val dotenv = io.github.cdimascio.dotenv.Dotenv.configure()
-            .directory("./")  // Ganti dengan direktori file .env Anda
+        private val dotenv = Dotenv.configure()
+            .directory(System.getProperty("user.dir"))  // Arahkan ke root proyek
             .load()
         val key = dotenv["SECRET_KEY"]
         private val instance: JWTGenerator = JWTGenerator()
