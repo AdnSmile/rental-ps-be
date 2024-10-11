@@ -27,4 +27,6 @@ data class ReqRegisterUser(
     @JsonProperty("no_wa")
     @field:Size(min = 3)
     val noWa: String?,
+
+    val image: String? = null,
 )

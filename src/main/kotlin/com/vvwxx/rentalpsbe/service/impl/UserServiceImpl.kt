@@ -4,6 +4,7 @@ import com.vvwxx.rentalpsbe.dto.response.ResUser
 import com.vvwxx.rentalpsbe.entity.UserEntity
 import com.vvwxx.rentalpsbe.exception.NotFoundException
 import com.vvwxx.rentalpsbe.repository.UserRepository
+import com.vvwxx.rentalpsbe.service.UploadService
 import com.vvwxx.rentalpsbe.service.UserService
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service
 @Service
 class UserServiceImpl(
     private val userRepo: UserRepository,
+    private val uploadService: UploadService,
 //    private val validationUtil: ValidationUtil
 ) : UserService {
 

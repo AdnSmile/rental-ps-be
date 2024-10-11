@@ -23,6 +23,8 @@ data class MenuEntity(
 
     var stock: Int? = null,
 
+    var image: String? = null,
+
     @JsonProperty("created_at")
     var createdAt: Date? = null,
 

@@ -23,4 +23,6 @@ data class ReqMenu (
     @field:PositiveOrZero(message = "field stock is must >= 0")
     val stock: Int? = null,
 
+    val image: String? = null,
+
 )

@@ -14,6 +14,8 @@ data class ResRegisterUser(
 
     val role: String?,
 
+    val image: String?,
+
     @JsonProperty("created_at")
     val createdAt: Date?,
 )

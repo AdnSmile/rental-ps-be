@@ -9,6 +9,7 @@ import com.vvwxx.rentalpsbe.exception.DuplicateException
 import com.vvwxx.rentalpsbe.exception.NotFoundException
 import com.vvwxx.rentalpsbe.repository.UserRepository
 import com.vvwxx.rentalpsbe.service.AuthService
+import com.vvwxx.rentalpsbe.service.UploadService
 import com.vvwxx.rentalpsbe.util.JWTGenerator
 import com.vvwxx.rentalpsbe.validation.ValidationUtil
 import org.mindrot.jbcrypt.BCrypt
@@ -19,9 +20,11 @@ import java.util.*
 class AuthServiceImpl(
     private val repo: UserRepository,
     private val validationUtil: ValidationUtil,
+    private val uploadService: UploadService,
 ) : AuthService {
 
     override fun register(req: ReqRegisterUser): ResRegisterUser {
+
 
         validationUtil.validate(req)
 
@@ -33,12 +36,23 @@ class AuthServiceImpl(
             throw DuplicateException("Email already exists")
         }
 
+        val imgUrl = if (req.image?.isNotEmpty() == true) {
+            uploadService.uploadFile(
+                req.image!!,
+                fileName = req.username.replace(" ", "_"),
+                folder = "users"
+            )
+        } else {
+            null
+        }
+
         val user = UserEntity(
             username = req.username,
             password = BCrypt.hashpw(req.password, BCrypt.gensalt()),
             email = req.email,
             noWa = req.noWa,
             role = "Customer",
+            image = imgUrl,
             createdAt = Date(),
             updatedAt = null,
         )
@@ -50,6 +64,7 @@ class AuthServiceImpl(
             email = user.email,
             noWa = user.noWa,
             role = user.role,
+            image = imgUrl,
             createdAt = user.createdAt
         )
     }

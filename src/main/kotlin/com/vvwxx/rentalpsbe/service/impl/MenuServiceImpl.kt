@@ -4,9 +4,11 @@ import com.vvwxx.rentalpsbe.dto.request.ReqList
 import com.vvwxx.rentalpsbe.dto.request.ReqMenu
 import com.vvwxx.rentalpsbe.dto.response.ResMenu
 import com.vvwxx.rentalpsbe.entity.MenuEntity
+import com.vvwxx.rentalpsbe.exception.DuplicateException
 import com.vvwxx.rentalpsbe.exception.NotFoundException
 import com.vvwxx.rentalpsbe.repository.MenuRepository
 import com.vvwxx.rentalpsbe.service.MenuService
+import com.vvwxx.rentalpsbe.service.UploadService
 import com.vvwxx.rentalpsbe.validation.ValidationUtil
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
@@ -17,18 +19,34 @@ import java.util.stream.Collectors
 @Service
 class MenuServiceImpl(
     val menuRepo: MenuRepository,
-    val validationUtil: ValidationUtil
+    val validationUtil: ValidationUtil,
+    private val uploadService: UploadService,
 ) : MenuService {
 
     override fun save(req: ReqMenu): ResMenu {
 
         validationUtil.validate(req)
 
+        if (menuRepo.existsByMenuName(req.menuName!!)) {
+            throw DuplicateException("Menu name already exists")
+        }
+
+        val imgUrl = if (req.image?.isNotEmpty() == true) {
+            uploadService.uploadFile(
+                req.image!!,
+                fileName = req.menuName.replace(" ", "_"),
+                folder = "menu"
+            )
+        } else {
+            null
+        }
+
         val menu = MenuEntity(
             menuName = req.menuName,
             menuType = req.menuType,
             price = req.price,
             stock = req.stock,
+            image = imgUrl,
             createdAt = Date(),
             updatedAt = null,
         )
@@ -85,6 +103,7 @@ class MenuServiceImpl(
             menuType = menu.menuType,
             price = menu.price,
             stock = menu.stock,
+            image = menu.image,
             createdAt = menu.createdAt,
             updatedAt = menu.updatedAt,
         )

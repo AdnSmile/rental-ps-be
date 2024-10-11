@@ -18,6 +18,8 @@ data class ResMenu(
 
     var stock: Int?,
 
+    var image: String? = null,
+
     @JsonProperty("created_at")
     val createdAt: Date?,
 
