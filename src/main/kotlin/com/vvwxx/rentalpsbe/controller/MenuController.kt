@@ -3,6 +3,7 @@ package com.vvwxx.rentalpsbe.controller
 import com.vvwxx.rentalpsbe.dto.request.ReqList
 import com.vvwxx.rentalpsbe.dto.request.ReqMenu
 import com.vvwxx.rentalpsbe.dto.response.BaseResponse
+import com.vvwxx.rentalpsbe.dto.response.PagingBaseResponse
 import com.vvwxx.rentalpsbe.exception.UnauthenticatedException
 import com.vvwxx.rentalpsbe.service.MenuService
 import com.vvwxx.rentalpsbe.util.JWTGenerator
@@ -21,11 +22,42 @@ class MenuController(
              @RequestParam("size", defaultValue = "10") size: Int,
              ) : ResponseEntity<Any> {
 
+        val actualPage =  if (page != 0) {
+            page - 1
+        } else {
+            page
+        }
+
         return ResponseEntity.status(HttpStatus.OK).body(
-            BaseResponse(
+            PagingBaseResponse(
                 message = "Successfully get list of menu",
                 status = "T",
-                data = menuService.list(ReqList(size, page))
+                page = page+1,
+                size = size,
+                data = menuService.list(ReqList(size, actualPage))
+            )
+        )
+    }
+
+    @GetMapping("/type")
+    fun listByMenuType(@RequestParam("page", defaultValue = "0") page: Int,
+                       @RequestParam("size", defaultValue = "10") size: Int,
+                       @RequestParam("menu_type") type: String,
+                       ) : ResponseEntity<Any> {
+
+        val actualPage =  if (page != 0) {
+            page - 1
+        } else {
+            page
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+            PagingBaseResponse(
+                message = "Successfully get list of menu",
+                status = "T",
+                page = page+1,
+                size = size,
+                data = menuService.getListByMenuType(type, ReqList(size, actualPage))
             )
         )
     }

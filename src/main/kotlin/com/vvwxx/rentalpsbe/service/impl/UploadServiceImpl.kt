@@ -20,4 +20,9 @@ class UploadServiceImpl(
 
         return "/$folderMinio/$folder/$fileName.png"
     }
+
+    override fun deleteFile(path: String) {
+
+        minioUpload.deleteFile(path)
+    }
 }

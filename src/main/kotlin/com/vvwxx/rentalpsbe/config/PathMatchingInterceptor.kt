@@ -14,5 +14,6 @@ class PathMatchingInterceptor(
             .excludePathPatterns("/v1/api/login")
             .excludePathPatterns("/v1/api/register")
             .excludePathPatterns("/v1/api/menu/all")
+            .excludePathPatterns("/v1/api/menu/{menu_type}")
     }
 }

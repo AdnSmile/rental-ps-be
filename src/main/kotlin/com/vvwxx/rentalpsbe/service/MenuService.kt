@@ -15,4 +15,6 @@ interface MenuService {
     fun delete(id: Int)
 
     fun list(req: ReqList): List<ResMenu>
+
+    fun getListByMenuType(menuType: String, req: ReqList): List<ResMenu>
 }

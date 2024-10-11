@@ -13,7 +13,8 @@ Request:
     "username": "string, unique",
     "password": "string",
     "email": "string, unique",
-    "no_wa": "string"
+    "no_wa": "string",
+    "image": "base64" (optional)
 }
 ```
 
@@ -27,6 +28,7 @@ Response:
         "email": "string, unique",
         "no_wa": "string",
         "role": "string",
+        "image": "string",
         "created_at": "date"
     }
 }
@@ -75,26 +77,72 @@ Request:
 Response:
 ```
 {
-    "status": "T",
-    "message": "Successfully get list of menu",
-    "data": [
+    "status" : "T",
+    "message" : "Successfully get list of menu",
+    "page" : "number",
+    "size" : "number",
+    "data" : [
         {
-            "menu_id": "number",
-            "menu_name": "string",
-            "menu_type": "string" (value: Makanan / Minuman),
-            "price": "number",
-            "stock": "number",
-            "created_at": "date",
-            "updated_at": "date"
+            "menu_id" : "number",
+            "menu_name" : "string",
+            "menu_type" : "string" (value: Makanan / Minuman),
+            "price" : "number",
+            "stock" : "number",
+            "menu" : "string",
+            "created_at" : "date",
+            "updated_at" : "date"
         },
         {
-            "menu_id": "number",
-            "menu_name": "string",
-            "menu_type": "string" (value: Makanan / Minuman),
-            "price": "number",
-            "stock": "number",
-            "created_at": "date",
-            "updated_at": "date"
+            "menu_id" : "number",
+            "menu_name" : "string",
+            "menu_type" : "string" (value: Makanan / Minuman),
+            "price" : "number",
+            "stock" : "number",
+            "menu" : "string",
+            "created_at" : "date",
+            "updated_at" : "date"
+        },
+    ]
+}
+```
+
+### Get menu list by Menu type
+
+Request:
+- Method : GET
+- Endpoint : `/v1/api/menu/all`
+- Params :
+  - page : number (optional)
+  - size : number (optional)
+  - menu_type : "string" (value: Makanan / Minuman)
+
+Response:
+```
+{
+    "status" : "T",
+    "message" : "Successfully get list of menu",
+    "page" : "number",
+    "size" : "number",
+    "data" : [
+        {
+            "menu_id" : "number",
+            "menu_name" : "string",
+            "menu_type" : "string" (value: Makanan / Minuman),
+            "price" : "number",
+            "stock" : "number",
+            "menu" : "string",
+            "created_at" : "date",
+            "updated_at" : "date"
+        },
+        {
+            "menu_id" : "number",
+            "menu_name" : "string",
+            "menu_type" : "string" (value: Makanan / Minuman),
+            "price" : "number",
+            "stock" : "number",
+            "menu" : "string",
+            "created_at" : "date",
+            "updated_at" : "date"
         },
     ]
 }
@@ -111,16 +159,17 @@ Request:
 Response:
 ```
 {
-    "status": "T",
-    "message": "Successfully get the menu with id 2",
+    "status" : "T",
+    "message" : "Successfully get the menu with id 2",
     "data": {
-        "menu_id": "number",
-        "menu_name": "string",
-        "menu_type": "string" (value: Makanan / Minuman),
-        "price": "number",
-        "stock": "number",
-        "created_at": "date",
-        "updated_at": "date"
+        "menu_id" : "number",
+        "menu_name" : "string",
+        "menu_type" : "string" (value: Makanan / Minuman),
+        "price" : "number",
+        "stock" : "number",
+        "menu" : "string",
+        "created_at" : "date",
+        "updated_at" : "date"
     }
 }
 ```
@@ -135,10 +184,11 @@ Request:
 - Body :
 ```
 {
-    "menu_name": "string",
-    "menu_type": "string" (value: Makanan / Minuman),
-    "price": "number",
-    "stock": "number"
+    "menu_name" : "string",
+    "menu_type" : "string" (value: Makanan / Minuman),
+    "price" : "number",
+    "stock" : "number",
+    "image" : "base64" (optional)
 }
 ```
 
@@ -148,13 +198,14 @@ Response:
     "status": "T",
     "message": "Successfully create a menu",
     "data": {
-        "menu_id": "number",
-        "menu_name": "string",
-        "menu_type": "string" (value: Makanan / Minuman),
-        "price": "number",
+        "menu_id" : "number",
+        "menu_name" : "string",
+        "menu_type" : "string" (value: Makanan / Minuman),
+        "price" : "number",
         "stock": "number",
-        "created_at": "date",
-        "updated_at": "date"
+        "menu" : "string",
+        "created_at" : "date",
+        "updated_at" : "date"
     }
 }
 ```
@@ -187,6 +238,7 @@ Response:
         "menu_type": "string" (value: Makanan / Minuman),
         "price": "number",
         "stock": "number",
+        "menu" : "string",
         "created_at": "date",
         "updated_at": "date"
     }

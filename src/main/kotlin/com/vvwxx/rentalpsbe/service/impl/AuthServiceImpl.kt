@@ -11,6 +11,7 @@ import com.vvwxx.rentalpsbe.repository.UserRepository
 import com.vvwxx.rentalpsbe.service.AuthService
 import com.vvwxx.rentalpsbe.service.UploadService
 import com.vvwxx.rentalpsbe.util.JWTGenerator
+import com.vvwxx.rentalpsbe.util.Util
 import com.vvwxx.rentalpsbe.validation.ValidationUtil
 import org.mindrot.jbcrypt.BCrypt
 import org.springframework.stereotype.Service
@@ -39,7 +40,7 @@ class AuthServiceImpl(
         val imgUrl = if (req.image?.isNotEmpty() == true) {
             uploadService.uploadFile(
                 req.image!!,
-                fileName = req.username.replace(" ", "_"),
+                fileName = Util.filePath(req.username.replace(" ", "_")),
                 folder = "users"
             )
         } else {

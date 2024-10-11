@@ -9,6 +9,7 @@ import com.vvwxx.rentalpsbe.exception.NotFoundException
 import com.vvwxx.rentalpsbe.repository.MenuRepository
 import com.vvwxx.rentalpsbe.service.MenuService
 import com.vvwxx.rentalpsbe.service.UploadService
+import com.vvwxx.rentalpsbe.util.Util
 import com.vvwxx.rentalpsbe.validation.ValidationUtil
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
@@ -34,7 +35,7 @@ class MenuServiceImpl(
         val imgUrl = if (req.image?.isNotEmpty() == true) {
             uploadService.uploadFile(
                 req.image!!,
-                fileName = req.menuName.replace(" ", "_"),
+                fileName = Util.filePath(req.menuName.replace(" ", "_")),
                 folder = "menu"
             )
         } else {
@@ -61,11 +62,27 @@ class MenuServiceImpl(
 
         validationUtil.validate(req)
 
+        if (menuRepo.existsByMenuName(req.menuName!!) && menu.menuName != req.menuName) {
+            throw DuplicateException("Menu name already exists")
+        }
+
+        val imgUrl = if (req.image?.isNotEmpty() == true) {
+
+            uploadService.uploadFile(
+                req.image!!,
+                fileName = Util.filePath(req.menuName!!.replace(" ", "_")),
+                folder = "menu"
+            )
+        } else {
+            menu.image
+        }
+
         menu.apply {
             menuName = req.menuName
             menuType = req.menuType
             price = req.price
             stock = req.stock
+            image = imgUrl
             updatedAt = Date()
         }
 
@@ -88,6 +105,13 @@ class MenuServiceImpl(
     override fun list(req: ReqList): List<ResMenu> {
 
         val page = menuRepo.findAll(PageRequest.of(req.page, req.size))
+        val menuList: List<MenuEntity> = page.get().collect(Collectors.toList())
+        return menuList.map { convertMenuToResMenu(it) }
+    }
+
+    override fun getListByMenuType(menuType: String, req: ReqList): List<ResMenu> {
+
+        val page = menuRepo.findByMenuType(menuType, PageRequest.of(req.page, req.size))
         val menuList: List<MenuEntity> = page.get().collect(Collectors.toList())
         return menuList.map { convertMenuToResMenu(it) }
     }

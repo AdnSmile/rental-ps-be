@@ -40,10 +40,22 @@ class ErrorHandler {
         )
     }
 
+    @ExceptionHandler(RuntimeException::class)
+    fun runtime(notFoundException: RuntimeException): ResponseEntity<BaseResponse<Any>> {
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+            BaseResponse(
+                message = notFoundException.message,
+                status = "F",
+                data = null
+            )
+        )
+    }
+
     @ExceptionHandler(IllegalStateException::class)
     fun ilegal(notFoundException: IllegalStateException): ResponseEntity<BaseResponse<Any>> {
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
             BaseResponse(
                 message = notFoundException.message,
                 status = "F",
