@@ -307,6 +307,8 @@ Response:
 }
 ```
 
+<br />
+
 ### Get ps list by class
 
 Request:
@@ -347,6 +349,8 @@ Response:
 }
 ```
 
+<br />
+
 ### Get ps list by class
 
 Request:
@@ -384,6 +388,31 @@ Response:
             "updated_at": "date"
         }
     ]
+}
+```
+
+<br />
+
+### Get PS room by id
+
+Request:
+- Method : DELETE
+- Endpoint : `/v1/api/ps/{psId}`
+
+Response:
+```
+{
+    "status": "T",
+    "message": "Successfully get list of playstation room by id VIP01",
+    "data": {
+        "ps_id": "string",
+        "ps_class": "string",
+        "ps_type": "string",
+        "status": "string",
+        "hourly_rate": string,
+        "created_at": "date",
+        "updated_at": "date"
+    }
 }
 ```
 
