@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface MenuRepository: JpaRepository<MenuEntity, Int> {
 
-    fun findByMenuType(menuType: String, pageable: Pageable): Page<MenuEntity>
+    fun findByMenuTypeOrderByCreatedAtDesc(menuType: String, pageable: Pageable): Page<MenuEntity>
+
+    fun findAllByOrderByCreatedAtDesc(pageable: Pageable): Page<MenuEntity>
 
     fun existsByMenuName(menuName: String): Boolean
 }

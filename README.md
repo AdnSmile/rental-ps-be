@@ -63,6 +63,8 @@ Response:
 }
 ```
 
+<br />
+
 ## Menu
 
 ### Get menu list
@@ -258,6 +260,221 @@ Response:
 {
     "status": "T",
     "message": "Successfully delete a menu with id 4",
+    "data": {}
+}
+```
+
+<br />
+
+## PS Room
+
+### Get ps list
+
+Request:
+- Method : GET
+- Endpoint : `/v1/api/ps/all`
+- Params :
+  - page: number (optional)
+  - size: number (optional)
+
+Response:
+```
+{
+    "status" : "T",
+    "message" : "Successfully get list of menu",
+    "page" : "number",
+    "size" : "number",
+    "data" : [
+        {
+            "ps_id": "string",
+            "ps_class": "string",
+            "ps_type": "string",
+            "status": "string",
+            "hourly_rate": string,
+            "created_at": "date",
+            "updated_at": "date"
+        },
+        {
+            "ps_id": "string",
+            "ps_class": "string",
+            "ps_type": "string",
+            "status": "string",
+            "hourly_rate": string,
+            "created_at": "date",
+            "updated_at": "date"
+        }
+    ]
+}
+```
+
+### Get ps list by class
+
+Request:
+- Method : GET
+- Endpoint : `/v1/api/ps/class`
+- Params :
+  - ps_class : "string" (vip/general)
+  - page : number (optional)
+  - size : number (optional)
+
+Response:
+```
+{
+    "status" : "T",
+    "message" : "Successfully get list of menu",
+    "page" : "number",
+    "size" : "number",
+    "data" : [
+        {
+            "ps_id": "string",
+            "ps_class": "string",
+            "ps_type": "string",
+            "status": "string",
+            "hourly_rate": string,
+            "created_at": "date",
+            "updated_at": "date"
+        },
+        {
+            "ps_id": "string",
+            "ps_class": "string",
+            "ps_type": "string",
+            "status": "string",
+            "hourly_rate": string,
+            "created_at": "date",
+            "updated_at": "date"
+        }
+    ]
+}
+```
+
+### Get ps list by class
+
+Request:
+- Method : GET
+- Endpoint : `/v1/api/ps/type`
+- Params :
+  - ps_type : "string" (ps3/ps4/ps5)
+  - page : number (optional)
+  - size : number (optional)
+
+Response:
+```
+{
+    "status" : "T",
+    "message" : "Successfully get list of menu",
+    "page" : "number",
+    "size" : "number",
+    "data" : [
+        {
+            "ps_id": "string",
+            "ps_class": "string",
+            "ps_type": "string",
+            "status": "string",
+            "hourly_rate": string,
+            "created_at": "date",
+            "updated_at": "date"
+        },
+        {
+            "ps_id": "string",
+            "ps_class": "string",
+            "ps_type": "string",
+            "status": "string",
+            "hourly_rate": string,
+            "created_at": "date",
+            "updated_at": "date"
+        }
+    ]
+}
+```
+
+<br />
+
+### Create PS room
+
+Request:
+- Method : POST
+- Endpoint : `/v1/api/ps`
+- Header :
+  - token : value
+- Body :
+```
+{
+    "ps_id": "number",
+    "ps_class": "string", (value: vip / general)
+    "ps_type": "string",
+    "status": "string",
+    "hourly_rate": "number"
+}
+```
+
+Response:
+```
+{
+    "status": "T",
+    "message": "Successfully create new playstation room",
+    "data": {
+        "ps_id": "string",
+        "ps_class": "string",
+        "ps_type": "string",
+        "status": "string",
+        "hourly_rate": "number",
+        "created_at": "date",
+        "updated_at": "date"
+    }
+}
+```
+
+<br />
+
+### Update PS room
+
+Request:
+- Method : PUT
+- Endpoint : `/v1/api/ps`
+- Header :
+  - token : value
+- Body :
+```
+{
+    "ps_class": "string", (value: vip / general)
+    "ps_type": "string",
+    "status": "string",
+    "hourly_rate": "number"
+}
+```
+
+Response:
+```
+{
+    "status": "T",
+    "message": "Successfully updated playstation room with id VIP02",
+    "data": {
+        "ps_id": "string",
+        "ps_class": "string",
+        "ps_type": "string",
+        "status": "string",
+        "hourly_rate": "number",
+        "created_at": "date",
+        "updated_at": "date"
+    }
+}
+```
+
+<br />
+
+### DELETE PS room
+
+Request:
+- Method : DELETE
+- Endpoint : `/v1/api/ps/{psId}`
+- Header :
+  - token : value
+
+Response:
+```
+{
+    "status": "T",
+    "message": "Successfully deleted playstation room with id VIP10",
     "data": {}
 }
 ```

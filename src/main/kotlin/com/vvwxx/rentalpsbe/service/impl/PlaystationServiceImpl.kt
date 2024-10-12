@@ -83,6 +83,20 @@ class PlaystationServiceImpl (
         return psList.map { convertPsToRes(it) }
     }
 
+    override fun listByClass(psClass: String, req: ReqList): List<ResPlaystation> {
+
+        val page = psRepo.findByPsClassOrderByCreatedAt(psClass.uppercase(), PageRequest.of(req.page, req.size))
+        val psList: List<PlaystationEntity> = page.get().collect(Collectors.toList())
+        return psList.map { convertPsToRes(it) }
+    }
+
+    override fun listByType(psType: String, req: ReqList): List<ResPlaystation> {
+
+        val page = psRepo.findByPsTypeOrderByCreatedAt(psType.uppercase(), PageRequest.of(req.page, req.size))
+        val psList: List<PlaystationEntity> = page.get().collect(Collectors.toList())
+        return psList.map { convertPsToRes(it) }
+    }
+
     private fun findByIdCustom(id: String): PlaystationEntity {
         return psRepo.findByIdOrNull(id) ?: throw NotFoundException("Playstation with id $id not found")
     }
@@ -90,8 +104,8 @@ class PlaystationServiceImpl (
     private fun generateId(id: String, psClass: String): String {
 
         return when (psClass) {
-            "VIP" -> "VIP{$id}"
-            else -> "GEN{$id}"
+            "vip" -> "VIP$id"
+            else -> "GEN$id"
         }
     }
 

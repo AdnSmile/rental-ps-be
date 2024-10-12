@@ -7,6 +7,7 @@ import com.vvwxx.rentalpsbe.dto.response.PagingBaseResponse
 import com.vvwxx.rentalpsbe.exception.UnauthenticatedException
 import com.vvwxx.rentalpsbe.service.MenuService
 import com.vvwxx.rentalpsbe.util.JWTGenerator
+import com.vvwxx.rentalpsbe.util.Util
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -22,19 +23,13 @@ class MenuController(
              @RequestParam("size", defaultValue = "10") size: Int,
              ) : ResponseEntity<Any> {
 
-        val actualPage =  if (page != 0) {
-            page - 1
-        } else {
-            page
-        }
-
         return ResponseEntity.status(HttpStatus.OK).body(
             PagingBaseResponse(
                 message = "Successfully get list of menu",
                 status = "T",
-                page = page+1,
+                page = if (page == 0) page+1 else page,
                 size = size,
-                data = menuService.list(ReqList(size, actualPage))
+                data = menuService.list(ReqList(size, Util.actualPageValue(page)))
             )
         )
     }
@@ -45,19 +40,13 @@ class MenuController(
                        @RequestParam("menu_type") type: String,
                        ) : ResponseEntity<Any> {
 
-        val actualPage =  if (page != 0) {
-            page - 1
-        } else {
-            page
-        }
-
         return ResponseEntity.status(HttpStatus.OK).body(
             PagingBaseResponse(
                 message = "Successfully get list of menu",
                 status = "T",
-                page = page+1,
+                page = if (page == 0) page+1 else page,
                 size = size,
-                data = menuService.getListByMenuType(type, ReqList(size, actualPage))
+                data = menuService.getListByMenuType(type, ReqList(size, Util.actualPageValue(page)))
             )
         )
     }

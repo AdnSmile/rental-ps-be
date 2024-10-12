@@ -16,4 +16,8 @@ interface PlaystationService {
     fun delete(psId: String)
 
     fun list(req: ReqList): List<ResPlaystation>
+
+    fun listByClass(psClass: String, req: ReqList): List<ResPlaystation>
+
+    fun listByType(psType: String, req: ReqList): List<ResPlaystation>
 }

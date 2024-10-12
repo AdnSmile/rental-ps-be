@@ -104,14 +104,14 @@ class MenuServiceImpl(
 
     override fun list(req: ReqList): List<ResMenu> {
 
-        val page = menuRepo.findAll(PageRequest.of(req.page, req.size))
+        val page = menuRepo.findAllByOrderByCreatedAtDesc(PageRequest.of(req.page, req.size))
         val menuList: List<MenuEntity> = page.get().collect(Collectors.toList())
         return menuList.map { convertMenuToResMenu(it) }
     }
 
     override fun getListByMenuType(menuType: String, req: ReqList): List<ResMenu> {
 
-        val page = menuRepo.findByMenuType(menuType, PageRequest.of(req.page, req.size))
+        val page = menuRepo.findByMenuTypeOrderByCreatedAtDesc(menuType, PageRequest.of(req.page, req.size))
         val menuList: List<MenuEntity> = page.get().collect(Collectors.toList())
         return menuList.map { convertMenuToResMenu(it) }
     }
