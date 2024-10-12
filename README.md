@@ -34,6 +34,8 @@ Response:
 }
 ```
 
+<br />
+
 ### Login
 
 Request:
@@ -108,6 +110,8 @@ Response:
 }
 ```
 
+<br />
+
 ### Get menu list by Menu type
 
 Request:
@@ -150,6 +154,8 @@ Response:
 }
 ```
 
+<br />
+
 ### Get menu by id
 
 Request:
@@ -175,6 +181,8 @@ Response:
     }
 }
 ```
+
+<br />
 
 ### Create menu
 
@@ -212,6 +220,8 @@ Response:
 }
 ```
 
+<br />
+
 ### Update menu
 
 Request:
@@ -246,6 +256,8 @@ Response:
     }
 }
 ```
+
+<br />
 
 ### DELETE menu 
 
